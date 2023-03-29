@@ -6,6 +6,7 @@ from src import music
 from src import nba
 from src import misc
 from replit import db
+from keep_alive import keep_alive
 
 def get_prefix(client, message): 
   id = str(message.guild.id)
