@@ -1,0 +1,2 @@
+# Discord-Bot
+This Discord Bot has two main functions: showing information about the NBA and playing music. For the NBA aspect, it can do things such as showing the stats of players in various seasons, and showing the current NBA standings. For the music aspect, you can do the typical things that you could expect such as playing a song and removing them, but you also have the option to do things such as shuffling the queue and clearing it.
