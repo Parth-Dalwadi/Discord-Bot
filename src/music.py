@@ -93,7 +93,9 @@ class Music(commands.Cog):
                 info = ydl.extract_info(f"ytsearch:{url}", download=False)['entries'][0]
               
               url2 = info["url"]
-              title = str(info.get('title', None))
+              title_url = str(info.get('webpage_url', None))
+              temp_title = str(info.get('title', None))
+              title = f"[{temp_title}]({title_url})"
               channel = str(info.get('channel', None))
               duration = info.get('duration', None)
               thumbnail = str(info.get('thumbnail', None))
