@@ -65,7 +65,7 @@ if "info" not in db.keys():
   info[0][1].append("[highlights, hl, hls] - Rolls a random NBA highlight video.")
   info[0][1].append("[allhighlights, allhl, allhls] - Shows the full list of NBA highlights.")
   
-  info[1][1].append("Makes the bot join the voice channel you're in.")
+  info[1][1].append("join - Makes the bot join the voice channel you're in.")
   info[1][1].append("[leave, disconnect, dc] - Makes the bot leave the voice channel it's in.")
   info[1][1].append("[play, add] <video name or url> - Plays a video from YouTube, or adds it to the queue if a video is playing.")
   info[1][1].append("[skip, next] - Skips the current video.")
@@ -108,15 +108,19 @@ if "info" not in db.keys():
   info[2][1].append("[awayrecord, away, road, roadrecord] <team name> - Shows the away record of the specifed team.")
 
   str1 = ""
-  for pair in info:
-    str1 += "**__" + pair[0] + "__**\n"
-    for i in range(len(pair[1])):
-      if i == 0:
+  for i in range(len(info)):
+    str1 += "**__" + info[i][0] + "__**\n"
+    for j in range(len(info[i][1])):
+      if j == 0:
         str1 += "***"
-      str1 += "```" + pair[1][i] + "```"
-      if i == len(pair[1]) - 1:
-        str1 += "***\n"
-      str1 += "\n"
+      str1 += "```" + info[i][1][j] + "```"
+      if j == len(info[i][1]) - 1:
+        str1 += "***"
+      else:
+        str1 += "\n"
+
+    if i != len(info) - 1:
+      str1 += "\n\n"
 
   db["info"] = str1
 
