@@ -54,61 +54,69 @@ if "symbols" not in db.keys():
   db["symbols"] = symbols
 
 if "info" not in db.keys():
-  info = []
-  info.append("**__General:__**\n***[changeprefix, changesymbol, changecommand] <prefix> - Changes the prefix symbol for the bot. (Admin only)")
-  info.append("cp3 - Rolls a random video about Chris Paul.")
-  info.append("allcp3 - Shows the full list of Chris Paul videos.")
-  info.append("[highlights, hl, hls] - Rolls a random NBA highlight video.")
-  info.append("[allhighlights, allhl, allhls] - Shows the full list of NBA highlights.***")
+  info = [[[]], [[]], [[]]]
+  info[0].insert(0, "General:")
+  info[1].insert(0, "Music:")
+  info[2].insert(0, "NBA:")
+
+  info[0][1].append("[changeprefix, changesymbol, changecommand] <prefix> - Changes the prefix symbol for the bot. (Admin only)")
+  info[0][1].append("cp3 - Rolls a random video about Chris Paul.")
+  info[0][1].append("allcp3 - Shows the full list of Chris Paul videos.")
+  info[0][1].append("[highlights, hl, hls] - Rolls a random NBA highlight video.")
+  info[0][1].append("[allhighlights, allhl, allhls] - Shows the full list of NBA highlights.")
   
-  info.append("\n**__Music:__**\n***join - Makes the bot join the voice channel you're in.")
-  info.append("[leave, disconnect, dc] - Makes the bot leave the voice channel it's in.")
-  info.append("[play, add] <video name or url> - Plays a video from YouTube, or adds it to the queue if a video is playing.")
-  info.append("[skip, next] - Skips the current video.")
-  info.append("[current, now, playing, np] - Shows the current video.")
-  info.append("[pause, stop] - Pauses the current video.")
-  info.append("[resume, start] - Resumes the current video.")
-  info.append("queue - Shows the queue of videos.")
-  info.append("shuffle - Shuffles the queue.")
-  info.append("clear - Clears the queue.")
-  info.append("[remove, rm, delete, del] <position> - Removes the video at <position> from the queue.")
-  info.append("[move, mv] <position 1> <position 2> - Moves the video at <position 1> to <position 2> in the queue.")
-  info.append("swap <position 1> <position 2> - Swaps the video at <position 1> with the video at <position 2> in the queue.***")
+  info[1][1].append("Makes the bot join the voice channel you're in.")
+  info[1][1].append("[leave, disconnect, dc] - Makes the bot leave the voice channel it's in.")
+  info[1][1].append("[play, add] <video name or url> - Plays a video from YouTube, or adds it to the queue if a video is playing.")
+  info[1][1].append("[skip, next] - Skips the current video.")
+  info[1][1].append("[current, now, playing, np] - Shows the current video.")
+  info[1][1].append("[pause, stop] - Pauses the current video.")
+  info[1][1].append("[resume, start] - Resumes the current video.")
+  info[1][1].append("queue - Shows the queue of videos.")
+  info[1][1].append("shuffle - Shuffles the queue.")
+  info[1][1].append("clear - Clears the queue.")
+  info[1][1].append("[remove, rm, delete, del] <position> - Removes the video at <position> from the queue.")
+  info[1][1].append("[move, mv] <position 1> <position 2> - Moves the video at <position 1> to <position 2> in the queue.")
+  info[1][1].append("swap <position 1> <position 2> - Swaps the video at <position 1> with the video at <position 2> in the queue.")
   
-  info.append("\n**__NBA:__**\n***points - Shows the top 10 NBA leaders in points.")
-  info.append("assists - Shows the top 10 NBA leaders in assists.")
-  info.append("rebounds - Shows the top 10 NBA leaders in rebounds.")
-  info.append("blocks - Shows the top 10 NBA leaders in blocks.")
-  info.append("steals - Shows the top 10 NBA leaders in steals.")
-  info.append("[turnovers, tovs] - Shows the top 10 NBA leaders in turnovers.")
-  info.append("[threes, 3s] - Shows the top 10 NBA leaders in threes.")
-  info.append("[orebounds, orebs] - Shows the top 10 NBA leaders in offensive rebounds.")
-  info.append("[drebounds, drebs] - Shows the top 10 NBA leaders in defensive rebounds.")
-  info.append("[freethrows, fts] - Shows the top 10 NBA leaders in free throws.")
-  info.append("[west, western, westernconference, westconference] - Shows the Western Conference standings.")
-  info.append("[east, eastern, easternconference, eastconference] - Shows the Eastern Conference standings.")
-  info.append("games - Shows the NBA games that are being played today. (Note the games change at 12:00 pm EST)")
-  info.append("arena <team name> - Shows the name of the arena of the specified NBA team.")
-  info.append("[coach, headcoach] <team name> - Shows the name of the Head Coach of the specified NBA team.")
-  info.append("[gm, generalmanager] <team name> - Shows the name of the General Manager of the specified NBA team.")
-  info.append("owner <team name> - Shows the name of the owner of the specified NBA team.")
-  info.append("[stats, s] <player name> - Shows the stats of the specified player in the current season.")
-  info.append("[statspost, sp] <player name> - Shows the stats of the specified player in the current postseason.")
-  info.append("[cstats, careerstats, cs] <player name> - Shows the career stats of the specified player.")
-  info.append("[cstatspost, careerstatspost, csp] <player name> - Shows the career playoff stats of the specified player.")
-  info.append("[sstats, seasonstats, ss] <player name> <season> - Shows the stats of the specified player in the specified season.")
-  info.append("[sstatspost, seasonstatspost, ssp] <player name> <season> - Shows the playoff stats of the specified player in the specified season.")
-  info.append("seasons <player name> - Shows the seasons that the specified player played in.")
-  info.append("[seasonspost, postseasons] <player name> - Shows the playoffs that the specified player played in.")
-  info.append("[homerecord, home] <team name> - Shows the home record of the specified team.")
-  info.append("[awayrecord, away, road, roadrecord] <team name> - Shows the away record of the specifed team.***")
+  info[2][1].append("points - Shows the top 10 NBA leaders in points.")
+  info[2][1].append("assists - Shows the top 10 NBA leaders in assists.")
+  info[2][1].append("rebounds - Shows the top 10 NBA leaders in rebounds.")
+  info[2][1].append("blocks - Shows the top 10 NBA leaders in blocks.")
+  info[2][1].append("steals - Shows the top 10 NBA leaders in steals.")
+  info[2][1].append("[turnovers, tovs] - Shows the top 10 NBA leaders in turnovers.")
+  info[2][1].append("[threes, 3s] - Shows the top 10 NBA leaders in threes.")
+  info[2][1].append("[orebounds, orebs] - Shows the top 10 NBA leaders in offensive rebounds.")
+  info[2][1].append("[drebounds, drebs] - Shows the top 10 NBA leaders in defensive rebounds.")
+  info[2][1].append("[freethrows, fts] - Shows the top 10 NBA leaders in free throws.")
+  info[2][1].append("[west, western, westernconference, westconference] - Shows the Western Conference standings.")
+  info[2][1].append("[east, eastern, easternconference, eastconference] - Shows the Eastern Conference standings.")
+  info[2][1].append("games - Shows the NBA games that are being played today. (Note the games change at 12:00 pm EST)")
+  info[2][1].append("arena <team name> - Shows the name of the arena of the specified NBA team.")
+  info[2][1].append("[coach, headcoach] <team name> - Shows the name of the Head Coach of the specified NBA team.")
+  info[2][1].append("[gm, generalmanager] <team name> - Shows the name of the General Manager of the specified NBA team.")
+  info[2][1].append("owner <team name> - Shows the name of the owner of the specified NBA team.")
+  info[2][1].append("[stats, s] <player name> - Shows the stats of the specified player in the current season.")
+  info[2][1].append("[statspost, sp] <player name> - Shows the stats of the specified player in the current postseason.")
+  info[2][1].append("[cstats, careerstats, cs] <player name> - Shows the career stats of the specified player.")
+  info[2][1].append("[cstatspost, careerstatspost, csp] <player name> - Shows the career playoff stats of the specified player.")
+  info[2][1].append("[sstats, seasonstats, ss] <player name> <season> - Shows the stats of the specified player in the specified season.")
+  info[2][1].append("[sstatspost, seasonstatspost, ssp] <player name> <season> - Shows the playoff stats of the specified player in the specified season.")
+  info[2][1].append("seasons <player name> - Shows the seasons that the specified player played in.")
+  info[2][1].append("[seasonspost, postseasons] <player name> - Shows the playoffs that the specified player played in.")
+  info[2][1].append("[homerecord, home] <team name> - Shows the home record of the specified team.")
+  info[2][1].append("[awayrecord, away, road, roadrecord] <team name> - Shows the away record of the specifed team.")
 
   str1 = ""
-  for i in range(len(info)):
-    if i + 1 == len(info):
-      str1 += info[i]
-    else:
-      str1 += info[i] + "\n\n"
+  for pair in info:
+    str1 += "**__" + pair[0] + "__**\n"
+    for i in range(len(pair[1])):
+      if i == 0:
+        str1 += "***"
+      str1 += "```" + pair[1][i] + "```"
+      if i == len(pair[1]) - 1:
+        str1 += "***\n"
+      str1 += "\n"
 
   db["info"] = str1
 
