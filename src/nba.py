@@ -451,6 +451,7 @@ class NBA(commands.Cog):
           current_games += " | " + status[0] + ": " + status[1] + "***\n\n"
     
     embed = discord.Embed(title="**NBA Games on " + header + ":**", color=0xFF5733)
+    # embed.description = current_games + scheduled_games
     if current_games != "":
       embed.add_field(name="**Live Games:**", value=current_games, inline=False)
       if scheduled_games != "" or finished_games != "":
@@ -532,7 +533,7 @@ class NBA(commands.Cog):
     await self.standings_helper(ctx, "East", "Eastern")
 
   async def team_info_helper(self, ctx, name, mode):
-    if len(name) > 0 and len(name) < 4:
+    if len(name) >= 1 and len(name) <= 5:
       input_name = self.get_name_loop(name)
       team = self.get_team(input_name)
 
@@ -561,7 +562,7 @@ class NBA(commands.Cog):
     await self.team_info_helper(ctx, name, "Owner")
 
   async def stats_helper(self, ctx, name, mode):
-    if len(name) > 0 and len(name) < 3:
+    if len(name) >= 1 and len(name) <= 5:
       input_name = self.get_name_loop(name)
       player = self.get_player(input_name)
 
@@ -631,7 +632,7 @@ class NBA(commands.Cog):
       else:
         await ctx.send("**Player not found.**")
       
-    if len(info) >= 2 and len(info) <= 3:
+    if len(info) >= 2 and len(info) <= 6:
       season = info[len(info) - 1]
       if "-" in season:
         season_check = season.split("-", 1)

@@ -222,12 +222,20 @@ class Music(commands.Cog):
   async def queue(self, ctx):
     if ctx.guild.id in self.is_playing:
       if self.queue[ctx.guild.id] != []:
-        str1 = ""
+        embed_template = discord.Embed(title="**Queue:**", description="", color=0x670A0A)
+        embeds = [embed_template]
+        embed_index = 0
         for i in range(len(self.queue[ctx.guild.id])):
-          str1 += "***" + str(i+1) + ") " + str(self.queue[ctx.guild.id][i][1]) + "***\n"
+          str1 = "***" + str(i+1) + ") " + str(self.queue[ctx.guild.id][i][1]) + "***\n"
+
+          if len(embeds[embed_index].description) + len (str1) > 4096:
+            embeds.append(discord.Embed(title="**Queue Continued:**", description=str1, color=0x670A0A))
+            embed_index += 1
+
+          embeds[embed_index].description += str1
   
-        embed = discord.Embed(title="**Queue:**", description=str1, color=0x670A0A)
-        await ctx.send(embed=embed)
+        for embed in embeds:
+          await ctx.send(embed=embed)
       else:
         await ctx.send("**No songs in queue.**")
     else:

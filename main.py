@@ -124,6 +124,7 @@ if "info" not in db.keys():
 
   db["info"] = str1
 
+# client.remove_command("help")
 #-----Show that bot is logged in
 @client.event
 async def on_ready():
