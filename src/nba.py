@@ -456,51 +456,61 @@ class NBA(commands.Cog):
     return embed
   
   @commands.command()
+  @commands.bot_has_permissions(send_messages=True)
   async def points(self, ctx):
     embed = self.nba_leaders("PTSLeaders", "Point Leaders")
     await ctx.send(embed=embed)
 
   @commands.command()
+  @commands.bot_has_permissions(send_messages=True)
   async def rebounds(self, ctx):
     embed = self.nba_leaders("REBLeaders", "Rebound Leaders")
     await ctx.send(embed=embed)
 
   @commands.command()
+  @commands.bot_has_permissions(send_messages=True)
   async def assists(self, ctx):
     embed = self.nba_leaders("ASTLeaders", "Assist Leaders")
     await ctx.send(embed=embed)
 
   @commands.command()
+  @commands.bot_has_permissions(send_messages=True)
   async def blocks(self, ctx):
     embed = self.nba_leaders("BLKLeaders", "Block Leaders")
     await ctx.send(embed=embed)
 
   @commands.command()
+  @commands.bot_has_permissions(send_messages=True)
   async def steals(self, ctx):
     embed = self.nba_leaders("STLLeaders", "Steal Leaders")
     await ctx.send(embed=embed)
 
   @commands.command(aliases=["tovs"])
+  @commands.bot_has_permissions(send_messages=True)
   async def turnovers(self, ctx):
     embed = self.nba_leaders("TOVLeaders", "Turnover Leaders")
     await ctx.send(embed=embed)
 
   @commands.command(aliases=["3s"])
+  @commands.bot_has_permissions(send_messages=True)
   async def threes(self, ctx):
     embed = self.nba_leaders("FG3MLeaders", "Three Leaders")
     await ctx.send(embed=embed)
 
   @commands.command(aliases=["orebs"])
+  @commands.bot_has_permissions(send_messages=True)
   async def orebounds(self, ctx):
     embed = self.nba_leaders("OREBLeaders", "Offensive Rebound Leaders")
     await ctx.send(embed=embed)
 
   @commands.command(aliases=["drebs"])
+  @commands.bot_has_permissions(send_messages=True)
   async def drebounds(self, ctx):
     embed = self.nba_leaders("DREBLeaders", "Defensive Rebound Leaders")
     await ctx.send(embed=embed)
 
   @commands.command(aliases=["fts"])
+  @commands.bot_has_permissions(send_messages=True)
   async def freethrows(self, ctx):
     embed = self.nba_leaders("FTMLeaders", "Free Throw Leaders")
     await ctx.send(embed=embed)
@@ -513,10 +523,12 @@ class NBA(commands.Cog):
       await ctx.send("**No standings to display at the moment.**")
 
   @commands.command(aliases=["western", "westernconference", "westconference"])
+  @commands.bot_has_permissions(send_messages=True)
   async def west(self, ctx):
     await self.standings_helper(ctx, "West", "Western")
 
   @commands.command(aliases=["eastern", "easternconference", "eastconference"])
+  @commands.bot_has_permissions(send_messages=True)
   async def east(self, ctx):
     await self.standings_helper(ctx, "East", "Eastern")
 
@@ -534,18 +546,22 @@ class NBA(commands.Cog):
       await ctx.send("**Invalid input.**")
 
   @commands.command()
+  @commands.bot_has_permissions(send_messages=True)
   async def arena(self, ctx, *name):
     await self.team_info_helper(ctx, name, "Arena")
 
   @commands.command(aliases=["headcoach"])
+  @commands.bot_has_permissions(send_messages=True)
   async def coach(self, ctx, *name):
     await self.team_info_helper(ctx, name, "Head Coach")
 
   @commands.command(aliases=["generalmanager"])
+  @commands.bot_has_permissions(send_messages=True)
   async def gm(self, ctx, *name):
     await self.team_info_helper(ctx, name, "General Manager")
 
   @commands.command()
+  @commands.bot_has_permissions(send_messages=True)
   async def owner(self, ctx, *name):
     await self.team_info_helper(ctx, name, "Owner")
 
@@ -566,42 +582,52 @@ class NBA(commands.Cog):
       await ctx.send("**Input only allows for first name, last name, or first name and last name.**")
 
   @commands.command(aliases=["careerstats", "cs"])
+  @commands.bot_has_permissions(send_messages=True)
   async def cstats(self, ctx, *name):
     await self.stats_helper(ctx, name, "regular")
 
   @commands.command(aliases=["careerstatspost", "csp"])
+  @commands.bot_has_permissions(send_messages=True)
   async def cstatspost(self, ctx, *name):
     await self.stats_helper(ctx, name, "post")
 
   @commands.command(aliases=["s"])
+  @commands.bot_has_permissions(send_messages=True)
   async def stats(self, ctx, *name):
     await self.stats_helper(ctx, name, "seasonRegular")
 
   @commands.command(aliases=["sp"])
+  @commands.bot_has_permissions(send_messages=True)
   async def statspost(self, ctx, *name):
     await self.stats_helper(ctx, name, "seasonPost")
 
   @commands.command()
+  @commands.bot_has_permissions(send_messages=True)
   async def seasons(self, ctx, *name):
     await self.stats_helper(ctx, name, "seasons")
 
   @commands.command(aliases=["seasonspost"])
+  @commands.bot_has_permissions(send_messages=True)
   async def postseasons(self, ctx, *name):
     await self.stats_helper(ctx, name, "postseasons")
 
   @commands.command(aliases=["home"])
+  @commands.bot_has_permissions(send_messages=True)
   async def homerecord(self, ctx, *name):
     await self.team_info_helper(ctx, name, "Home")
 
   @commands.command(aliases=["away", "road", "roadrecord"])
+  @commands.bot_has_permissions(send_messages=True)
   async def awayrecord(self, ctx, *name):
     await self.team_info_helper(ctx, name, "Away")
 
   @commands.command(aliases=["seasonstats", "ss"])
+  @commands.bot_has_permissions(send_messages=True)
   async def sstats(self, ctx, *info):
     await self.sstats_helper(ctx, info, "regular")
 
   @commands.command(aliases=["seasonstatspost", "ssp"])
+  @commands.bot_has_permissions(send_messages=True)
   async def sstatspost(self, ctx, *info):
     await self.sstats_helper(ctx, info, "post")
 
@@ -638,6 +664,7 @@ class NBA(commands.Cog):
       await ctx.send("**Invalid input.**")
 
   @commands.command()
+  @commands.bot_has_permissions(send_messages=True)
   async def games(self, ctx):
     try:
       this_scoreboard = scoreboard.ScoreBoard()

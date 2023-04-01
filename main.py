@@ -139,6 +139,7 @@ async def on_guild_remove(guild):
   del db["guild_symbols"][str(guild.id)]
 
 @client.command(aliases=["changesymbol", "changecommand"])
+@commands.bot_has_permissions(send_messages=True)
 async def changeprefix(ctx, prefix):
   if ctx.message.author.guild_permissions.administrator == True:
     if prefix in db["symbol_list"]:
@@ -150,6 +151,7 @@ async def changeprefix(ctx, prefix):
     await ctx.send("**Only admins can change the prefix.**")
 
 @client.command(aliases=["information", "commands"])
+@commands.bot_has_permissions(send_messages=True)
 async def info(ctx):
   embed = discord.Embed(title="**Commands**", description=db["info"], color=0xCCAC00)
   await ctx.send(embed=embed)
