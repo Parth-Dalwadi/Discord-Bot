@@ -16,7 +16,7 @@ def get_prefix(client, message):
     db["guild_symbols"][id] = "$"
     return db["guild_symbols"][id]
 
-client = commands.Bot(command_prefix=get_prefix, intents=discord.Intents().all())
+client = commands.Bot(command_prefix=get_prefix, help_command=None, intents=discord.Intents().all())
 cogs = [music, nba, misc]
 
 async def cogs_start():
@@ -89,23 +89,23 @@ if "info" not in db.keys():
   info[2][1].append("[orebounds, orebs] - Shows the top 10 NBA leaders in offensive rebounds.")
   info[2][1].append("[drebounds, drebs] - Shows the top 10 NBA leaders in defensive rebounds.")
   info[2][1].append("[freethrows, fts] - Shows the top 10 NBA leaders in free throws.")
-  info[2][1].append("[west, western, westernconference, westconference] - Shows the Western Conference standings.")
-  info[2][1].append("[east, eastern, easternconference, eastconference] - Shows the Eastern Conference standings.")
+  info[2][1].append("[westernconference, westconference, western, west] - Shows the Western Conference standings.")
+  info[2][1].append("[easternconference, eastconference, eastern, east] - Shows the Eastern Conference standings.")
   info[2][1].append("games - Shows the NBA games that are being played today. (Note the games change at 12:00 pm EST)")
   info[2][1].append("arena <team name> - Shows the name of the arena of the specified NBA team.")
-  info[2][1].append("[coach, headcoach] <team name> - Shows the name of the Head Coach of the specified NBA team.")
-  info[2][1].append("[gm, generalmanager] <team name> - Shows the name of the General Manager of the specified NBA team.")
+  info[2][1].append("[headcoach, coach] <team name> - Shows the name of the Head Coach of the specified NBA team.")
+  info[2][1].append("[generalmanager, gm] <team name> - Shows the name of the General Manager of the specified NBA team.")
   info[2][1].append("owner <team name> - Shows the name of the owner of the specified NBA team.")
   info[2][1].append("[stats, s] <player name> - Shows the stats of the specified player in the current season.")
   info[2][1].append("[statspost, sp] <player name> - Shows the stats of the specified player in the current postseason.")
-  info[2][1].append("[cstats, careerstats, cs] <player name> - Shows the career stats of the specified player.")
-  info[2][1].append("[cstatspost, careerstatspost, csp] <player name> - Shows the career playoff stats of the specified player.")
-  info[2][1].append("[sstats, seasonstats, ss] <player name> <season> - Shows the stats of the specified player in the specified season.")
-  info[2][1].append("[sstatspost, seasonstatspost, ssp] <player name> <season> - Shows the playoff stats of the specified player in the specified season.")
+  info[2][1].append("[careerstats, cstats, cs] <player name> - Shows the career stats of the specified player.")
+  info[2][1].append("[careerstatspost, cstatspost, csp] <player name> - Shows the career playoff stats of the specified player.")
+  info[2][1].append("[seasonstats, sstats, ss] <player name> <season> - Shows the stats of the specified player in the specified season.")
+  info[2][1].append("[seasonstatspost, sstatspost, ssp] <player name> <season> - Shows the playoff stats of the specified player in the specified season.")
   info[2][1].append("seasons <player name> - Shows the seasons that the specified player played in.")
   info[2][1].append("[seasonspost, postseasons] <player name> - Shows the playoffs that the specified player played in.")
   info[2][1].append("[homerecord, home] <team name> - Shows the home record of the specified team.")
-  info[2][1].append("[awayrecord, away, road, roadrecord] <team name> - Shows the away record of the specifed team.")
+  info[2][1].append("[awayrecord, roadrecord, away, road] <team name> - Shows the away record of the specifed team.")
 
   str1 = ""
   for i in range(len(info)):
@@ -124,7 +124,6 @@ if "info" not in db.keys():
 
   db["info"] = str1
 
-# client.remove_command("help")
 #-----Show that bot is logged in
 @client.event
 async def on_ready():
@@ -150,9 +149,9 @@ async def changeprefix(ctx, prefix):
   else:
     await ctx.send("**Only admins can change the prefix.**")
 
-@client.command(aliases=["information", "commands"])
+@client.command(aliases=["info", "information", "commands"])
 @commands.bot_has_permissions(send_messages=True, embed_links=True)
-async def info(ctx):
+async def help(ctx):
   embed = discord.Embed(title="**Commands**", description=db["info"], color=0xCCAC00)
   await ctx.send(embed=embed)
 

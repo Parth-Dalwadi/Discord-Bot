@@ -718,7 +718,7 @@ class NBA(commands.Cog):
   @commands.command()
   @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def games(self, ctx):
-    """ Show NBA Games.
+    """ Shows NBA Games.
     
     This function will show the NBA games that are going to be played on the current day.
     Note: NBA games get changed at 12:00 pm EST.
