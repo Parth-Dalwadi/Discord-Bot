@@ -45,24 +45,25 @@ class Misc(commands.Cog):
     return embeds
 
   @commands.command()
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def cp3(self, ctx):
+    print(1)
     await ctx.send(self.random_video("cp3"))
 
   @commands.command(aliases=["hl", "hls"])
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def highlights(self, ctx):
     await ctx.send(self.random_video("highlights"))
 
   @commands.command()
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def allcp3(self, ctx):
     embeds = self.all_videos("CP3")
     for embed in embeds:
       await ctx.send(embed=embed)
 
   @commands.command(aliases=["allhl", "allhls"])
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def allhighlights(self, ctx):
     embeds = self.all_videos("Highlights")
     for embed in embeds:

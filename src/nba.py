@@ -456,62 +456,82 @@ class NBA(commands.Cog):
     return embed
   
   @commands.command()
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def points(self, ctx):
+    """Shows the top 10 point leaders in the NBA."""
+    
     embed = self.nba_leaders("PTSLeaders", "Point Leaders")
     await ctx.send(embed=embed)
 
   @commands.command()
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def rebounds(self, ctx):
+    """Shows the top 10 rebound leaders in the NBA."""
+    
     embed = self.nba_leaders("REBLeaders", "Rebound Leaders")
     await ctx.send(embed=embed)
 
   @commands.command()
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def assists(self, ctx):
+    """Shows the top 10 assist leaders in the NBA."""
+    
     embed = self.nba_leaders("ASTLeaders", "Assist Leaders")
     await ctx.send(embed=embed)
 
   @commands.command()
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def blocks(self, ctx):
+    """Shows the top 10 block leaders in the NBA."""
+    
     embed = self.nba_leaders("BLKLeaders", "Block Leaders")
     await ctx.send(embed=embed)
 
   @commands.command()
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def steals(self, ctx):
+    """Shows the top 10 steal leaders in the NBA."""
+    
     embed = self.nba_leaders("STLLeaders", "Steal Leaders")
     await ctx.send(embed=embed)
 
   @commands.command(aliases=["tovs"])
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def turnovers(self, ctx):
+    """Shows the top 10 turnover leaders in the NBA."""
+    
     embed = self.nba_leaders("TOVLeaders", "Turnover Leaders")
     await ctx.send(embed=embed)
 
   @commands.command(aliases=["3s"])
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def threes(self, ctx):
+    """Shows the top 10 threes made leaders in the NBA."""
+    
     embed = self.nba_leaders("FG3MLeaders", "Three Leaders")
     await ctx.send(embed=embed)
 
   @commands.command(aliases=["orebs"])
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def orebounds(self, ctx):
+    """Shows the top 10 offensive rebound leaders in the NBA."""
+    
     embed = self.nba_leaders("OREBLeaders", "Offensive Rebound Leaders")
     await ctx.send(embed=embed)
 
   @commands.command(aliases=["drebs"])
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def drebounds(self, ctx):
+    """Shows the top 10 defensive rebound leaders in the NBA."""
+    
     embed = self.nba_leaders("DREBLeaders", "Defensive Rebound Leaders")
     await ctx.send(embed=embed)
 
   @commands.command(aliases=["fts"])
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def freethrows(self, ctx):
+    """Shows the top 10 freethrows made leaders in the NBA."""
+    
     embed = self.nba_leaders("FTMLeaders", "Free Throw Leaders")
     await ctx.send(embed=embed)
 
@@ -523,13 +543,17 @@ class NBA(commands.Cog):
       await ctx.send("**No standings to display at the moment.**")
 
   @commands.command(aliases=["western", "westernconference", "westconference"])
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def west(self, ctx):
+    """Shows the Western Conference standings in the NBA."""
+    
     await self.standings_helper(ctx, "West", "Western")
 
   @commands.command(aliases=["eastern", "easternconference", "eastconference"])
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def east(self, ctx):
+    """Shows the Eastern Conference standings in the NBA."""
+    
     await self.standings_helper(ctx, "East", "Eastern")
 
   async def team_info_helper(self, ctx, name, mode):
@@ -546,23 +570,31 @@ class NBA(commands.Cog):
       await ctx.send("**Invalid input.**")
 
   @commands.command()
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def arena(self, ctx, *name):
+    """Shows the arena of the specified team in the NBA."""
+    
     await self.team_info_helper(ctx, name, "Arena")
 
   @commands.command(aliases=["headcoach"])
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def coach(self, ctx, *name):
+    """Shows the Head Coach of the specified team in the NBA."""
+    
     await self.team_info_helper(ctx, name, "Head Coach")
 
   @commands.command(aliases=["generalmanager"])
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def gm(self, ctx, *name):
+    """Shows the General Manager of the specified team."""
+    
     await self.team_info_helper(ctx, name, "General Manager")
 
   @commands.command()
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def owner(self, ctx, *name):
+    """Shows the owner of the specified team in the NBA."""
+    
     await self.team_info_helper(ctx, name, "Owner")
 
   async def stats_helper(self, ctx, name, mode):
@@ -582,53 +614,73 @@ class NBA(commands.Cog):
       await ctx.send("**Input only allows for first name, last name, or first name and last name.**")
 
   @commands.command(aliases=["careerstats", "cs"])
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def cstats(self, ctx, *name):
+    """Shows the specified NBA player's career stats."""
+    
     await self.stats_helper(ctx, name, "regular")
 
   @commands.command(aliases=["careerstatspost", "csp"])
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def cstatspost(self, ctx, *name):
+    """Shows the specified NBA player's career postseason stats."""
+    
     await self.stats_helper(ctx, name, "post")
 
   @commands.command(aliases=["s"])
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def stats(self, ctx, *name):
+    """Shows the specified NBA player's stats in the current season."""
+    
     await self.stats_helper(ctx, name, "seasonRegular")
 
   @commands.command(aliases=["sp"])
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def statspost(self, ctx, *name):
+    """Shows the specified NBA player's stats in the current postseason."""
+    
     await self.stats_helper(ctx, name, "seasonPost")
 
   @commands.command()
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def seasons(self, ctx, *name):
+    """Shows the seasons that the specified NBA player played in."""
+    
     await self.stats_helper(ctx, name, "seasons")
 
   @commands.command(aliases=["seasonspost"])
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def postseasons(self, ctx, *name):
+    """Shows the postseasons that the specified NBA player played in."""
+    
     await self.stats_helper(ctx, name, "postseasons")
 
   @commands.command(aliases=["home"])
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def homerecord(self, ctx, *name):
+    """Shows the specified NBA team's home record."""
+    
     await self.team_info_helper(ctx, name, "Home")
 
   @commands.command(aliases=["away", "road", "roadrecord"])
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def awayrecord(self, ctx, *name):
+    """Shows the specified NBA team's away record."""
+    
     await self.team_info_helper(ctx, name, "Away")
 
   @commands.command(aliases=["seasonstats", "ss"])
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def sstats(self, ctx, *info):
+    """Shows the specified NBA player's stats in the specified season."""
+    
     await self.sstats_helper(ctx, info, "regular")
 
   @commands.command(aliases=["seasonstatspost", "ssp"])
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def sstatspost(self, ctx, *info):
+    """Shows the specified NBA player's stats in the specified postseason."""
+    
     await self.sstats_helper(ctx, info, "post")
 
   async def sstats_helper(self, ctx, info, mode):
@@ -664,8 +716,14 @@ class NBA(commands.Cog):
       await ctx.send("**Invalid input.**")
 
   @commands.command()
-  @commands.bot_has_permissions(send_messages=True)
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def games(self, ctx):
+    """ Show NBA Games.
+    
+    This function will show the NBA games that are going to be played on the current day.
+    Note: NBA games get changed at 12:00 pm EST.
+    """
+    
     try:
       this_scoreboard = scoreboard.ScoreBoard()
       game_date = this_scoreboard.get_dict()["scoreboard"]["gameDate"]
