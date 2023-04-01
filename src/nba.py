@@ -672,9 +672,15 @@ class NBA(commands.Cog):
       games = this_scoreboard.games.get_dict()
   
       if games:
+        def starts_with_zero(date):
+          if date[0] == "0":
+            return date[1]
+          else:
+            return date
+            
         game_date = game_date.split("-")
-        if game_date[1][0] == "0":
-          game_date[1] == game_date[1][1]
+        game_date[1] = starts_with_zero(game_date[1])
+        game_date[2] = starts_with_zero(game_date[2])
         game_date[1] = calendar.month_name[int(game_date[1])]
         game_date = game_date[1] + " " + game_date[2] + ", " + game_date[0]
         embed = self.nba_games(game_date, games)
