@@ -433,9 +433,9 @@ class NBA(commands.Cog):
         scheduled_games += "***" + self.logos[away_team] + " " + away_team + "  at  " + home_team +  " " + self.logos[home_team] + " | " + status + "***\n\n"
       elif "Final" in status:
         if away_team_score > home_team_score:
-           finished_games += self.logos[away_team] + " __***" + away_team + " " + str(away_team_score) + "***__*** - " + str(home_team_score) + " " + home_team + " " + self.logos[home_team] + "***\n\n"
+           finished_games += self.logos[away_team] + " __***" + away_team + " " + str(away_team_score) + "***__*** - " + str(home_team_score) + " " + home_team + " " + self.logos[home_team] + " | Final***\n\n"
         else:
-          finished_games += self.logos[away_team] + " ***" + away_team + " " + str(away_team_score) + " - ***__***" + str(home_team_score) + " " + home_team + "***__ " + self.logos[home_team] + "\n\n"
+          finished_games += self.logos[away_team] + " ***" + away_team + " " + str(away_team_score) + " - ***__***" + str(home_team_score) + " " + home_team + "***__ " + self.logos[home_team] + " ***| Final***\n\n"
       else:    
         current_games +=  "***" + self.logos[away_team] + " " + away_team + " " + str(away_team_score) + " - " + str(home_team_score) + " " + home_team + " " + self.logos[home_team] + " "
         
@@ -451,19 +451,7 @@ class NBA(commands.Cog):
           current_games += " | " + status[0] + ": " + status[1] + "***\n\n"
     
     embed = discord.Embed(title="**NBA Games on " + header + ":**", color=0xFF5733)
-    # embed.description = current_games + scheduled_games
-    if current_games != "":
-      embed.add_field(name="**Live Games:**", value=current_games, inline=False)
-      if scheduled_games != "" or finished_games != "":
-        embed.add_field(name="", value="", inline=False)
-  
-    if scheduled_games != "":
-      embed.add_field(name="**Scheduled Games:**", value=scheduled_games, inline=False)
-      if finished_games != "":
-        embed.add_field(name="", value="", inline=False)
-  
-    if finished_games != "":
-      embed.add_field(name="**Finished Games:**", value=finished_games, inline=False)
+    embed.description = current_games + scheduled_games + finished_games
 
     return embed
   

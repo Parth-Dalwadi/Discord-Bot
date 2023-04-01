@@ -188,8 +188,11 @@ class Music(commands.Cog):
       if self.is_playing[ctx.guild.id] == True:
         if is_admin == True or ctx.author.voice is not None:
           if is_admin == True or ctx.voice_client.channel == ctx.author.voice.channel: 
-            await ctx.send("**CP3 has stopped playing.**")
-            await ctx.voice_client.pause()
+            if ctx.voice_client.is_paused():
+              await ctx.send("**Song is already paused.**")
+            else:
+              await ctx.send("**CP3 has stopped playing.**")
+              await ctx.voice_client.pause()
           else:
             await ctx.send("**Can't pause the song if you're not in the same voice channel.**")
         else:
@@ -207,8 +210,11 @@ class Music(commands.Cog):
       if self.is_playing[ctx.guild.id] == True:
         if is_admin == True or ctx.author.voice is not None:
           if is_admin == True or ctx.voice_client.channel == ctx.author.voice.channel:
-            await ctx.send("**CP3 has resumed.**")
-            await ctx.voice_client.resume()
+            if ctx.voice_client.is_paused():
+              await ctx.send("**CP3 has resumed playing.**")
+              await ctx.voice_client.resume()
+            else:
+              await ctx.send("**Song is already being played.**")
           else:
             await ctx.send("**Can't resume the song if you're not in the same voice channel.**")
         else:
