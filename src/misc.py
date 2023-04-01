@@ -47,7 +47,6 @@ class Misc(commands.Cog):
   @commands.command()
   @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def cp3(self, ctx):
-    print(1)
     await ctx.send(self.random_video("cp3"))
 
   @commands.command(aliases=["hl", "hls"])
