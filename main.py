@@ -138,7 +138,7 @@ async def on_guild_remove(guild):
   del db["guild_symbols"][str(guild.id)]
 
 @client.command(aliases=["changesymbol", "changecommand"])
-@commands.bot_has_permissions(send_messages=True, embed_links=True)
+@commands.bot_has_permissions(send_messages=True)
 async def changeprefix(ctx, prefix):
   if ctx.message.author.guild_permissions.administrator == True:
     if prefix in db["symbol_list"]:
