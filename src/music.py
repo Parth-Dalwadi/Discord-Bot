@@ -46,6 +46,7 @@ class Music(commands.Cog):
           del self.thumbnail[member.guild.id]
 
   @commands.command()
+  @commands.bot_has_permissions(send_messages=True)
   async def join(self, ctx):
     if ctx.author.voice is None:
       await ctx.send("**You're not in a voice channel.**")
@@ -63,6 +64,7 @@ class Music(commands.Cog):
         await ctx.send("**Already in the voice channel.**")
 
   @commands.command(aliases=["disconnect", "dc"])
+  @commands.bot_has_permissions(send_messages=True)
   async def leave(self, ctx):
     is_admin = ctx.message.author.guild_permissions.administrator
     
@@ -78,6 +80,7 @@ class Music(commands.Cog):
       await ctx.send("**Already not in voice channel.**")
 
   @commands.command(aliases=["add"])
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def play(self, ctx, *url):
     is_admin = ctx.message.author.guild_permissions.administrator
     
@@ -148,6 +151,7 @@ class Music(commands.Cog):
       self.is_playing[ctx.guild.id] = False
 
   @commands.command(aliases=["next"])
+  @commands.bot_has_permissions(send_messages=True)
   async def skip(self, ctx):
     is_admin = ctx.message.author.guild_permissions.administrator
 
@@ -167,6 +171,7 @@ class Music(commands.Cog):
       await ctx.send("**Not in a voice chat - nothing to skip.**")
 
   @commands.command(aliases=["now", "np", "playing"])
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def current(self, ctx):
     if ctx.guild.id in self.is_playing:
       if self.is_playing[ctx.guild.id] == True:
@@ -181,6 +186,7 @@ class Music(commands.Cog):
       await ctx.send("**Not in a voice chat - nothing is being played currently.**")
   
   @commands.command(aliases=["stop"])
+  @commands.bot_has_permissions(send_messages=True)
   async def pause(self, ctx):
     is_admin = ctx.message.author.guild_permissions.administrator
     
@@ -203,6 +209,7 @@ class Music(commands.Cog):
       await ctx.send("**Not in a voice chat - no song to pause.**")
 
   @commands.command(aliases=["start"])
+  @commands.bot_has_permissions(send_messages=True)
   async def resume(self, ctx):
     is_admin = ctx.message.author.guild_permissions.administrator
     
@@ -225,6 +232,7 @@ class Music(commands.Cog):
       await ctx.send("**Not in a voice chat - no song to resume.**")
 
   @commands.command()
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def queue(self, ctx):
     if ctx.guild.id in self.is_playing:
       if self.queue[ctx.guild.id] != []:
@@ -248,6 +256,7 @@ class Music(commands.Cog):
       await ctx.send("**Not in a voice chat - no songs in queue.**")
 
   @commands.command()
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def shuffle(self, ctx):
     is_admin = ctx.message.author.guild_permissions.administrator
     
@@ -270,6 +279,7 @@ class Music(commands.Cog):
       await ctx.send("**Not in a voice chat - queue is empty.**")
 
   @commands.command()
+  @commands.bot_has_permissions(send_messages=True)
   async def clear(self, ctx):
     is_admin = ctx.message.author.guild_permissions.administrator
     
@@ -289,6 +299,7 @@ class Music(commands.Cog):
       await ctx.send("**Not in a voice chat - queue is already empty.**")
 
   @commands.command(aliases=["rm", "delete", "del"])
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def remove(self, ctx, pos):
     is_admin = ctx.message.author.guild_permissions.administrator
     
@@ -320,10 +331,12 @@ class Music(commands.Cog):
       await ctx.send("**Not in a voice chat - queue is empty.**")
       
   @commands.command(aliases=["mv"])
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def move(self, ctx, pos1, pos2):      
     await self.move_swap_helper(ctx, pos1, pos2, "move")
 
   @commands.command()
+  @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def swap(self, ctx, pos1, pos2):
     await self.move_swap_helper(ctx, pos1, pos2, "swap")
 
