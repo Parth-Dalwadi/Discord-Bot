@@ -52,16 +52,21 @@ class Music(commands.Cog):
       await ctx.send("**You're not in a voice channel.**")
     else:
       voice_channel = ctx.author.voice.channel
-      if ctx.voice_client is None or ctx.voice_client.channel != voice_channel:
-        self.is_playing[ctx.guild.id] = False
-        if ctx.voice_client is None:
-          self.queue[ctx.guild.id] = []
-          await voice_channel.connect()
+      bot_perms = voice_channel.permissions_for(ctx.guild.me)
+      
+      if bot_perms.view_channel == True and bot_perms.connect == True and bot_perms.speak == True:
+        if ctx.voice_client is None or ctx.voice_client.channel != voice_channel:
+          self.is_playing[ctx.guild.id] = False
+          if ctx.voice_client is None:
+            self.queue[ctx.guild.id] = []
+            await voice_channel.connect()
+          else:
+            self.queue[ctx.guild.id].clear()
+            await ctx.voice_client.move_to(voice_channel)
         else:
-          self.queue[ctx.guild.id].clear()
-          await ctx.voice_client.move_to(voice_channel)
+          await ctx.send("**Already in the voice channel.**")
       else:
-        await ctx.send("**Already in the voice channel.**")
+        await ctx.send("**Make sure that CP3 can view the channel, connect to the channel, and speak in the channel!**")
 
   @commands.command(aliases=["disconnect", "dc"])
   @commands.bot_has_permissions(send_messages=True)
