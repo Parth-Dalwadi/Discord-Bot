@@ -236,7 +236,7 @@ class Music(commands.Cog):
     else:
       await ctx.send("**Not in a voice chat - no song to resume.**")
 
-  @commands.command()
+  @commands.command(aliases=["q"])
   @commands.bot_has_permissions(send_messages=True, embed_links=True)
   async def queue(self, ctx):
     if ctx.guild.id in self.is_playing:
@@ -248,11 +248,11 @@ class Music(commands.Cog):
           str1 = "***" + str(i+1) + ") " + str(self.queue[ctx.guild.id][i][1]) + "***\n"
 
           if len(embeds[embed_index].description) + len (str1) > 4096:
-            embeds.append(discord.Embed(title="**Queue Continued:**", description=str1, color=0x670A0A))
+            embeds.append(discord.Embed(title="**Queue Continued:**", description="", color=0x670A0A))
             embed_index += 1
 
           embeds[embed_index].description += str1
-  
+           
         for embed in embeds:
           await ctx.send(embed=embed)
       else:
