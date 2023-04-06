@@ -244,16 +244,18 @@ class Music(commands.Cog):
         embed_template = discord.Embed(title="**Queue:**", description="", color=0x670A0A)
         embeds = [embed_template]
         embed_index = 0
+        
         for i in range(len(self.queue[ctx.guild.id])):
-          str1 = "***" + str(i+1) + ") " + str(self.queue[ctx.guild.id][i][1]) + "***\n"
+          str1 = "***" + str(i+1) + ". " + str(self.queue[ctx.guild.id][i][1]) + " | `" + self.queue[ctx.guild.id][i][3] + "`***\n\n"
 
-          if len(embeds[embed_index].description) + len (str1) > 4096:
+          if len(embeds[embed_index].description) + len(str1) > 4096:
             embeds.append(discord.Embed(title="**Queue Continued:**", description="", color=0x670A0A))
             embed_index += 1
 
           embeds[embed_index].description += str1
-           
-        for embed in embeds:
+
+        for i, embed, in enumerate(embeds, start=1):
+          embed.set_footer(text="Page " + str(i) + "/" + str(len(embeds)))
           await ctx.send(embed=embed)
       else:
         await ctx.send("**No songs in queue.**")

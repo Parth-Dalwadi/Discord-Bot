@@ -258,7 +258,7 @@ class NBA(commands.Cog):
         for i in range(len(seasons)):
           if seasons[i][1] not in season_checker:
             seasons_played += 1
-            embed.description += "***__" + seasons[i][1] + "__ | "
+            embed.description += "***__" + seasons[i][1] + "__ "
             if seasons[i][4] in self.logos:
               team = self.logos[seasons[i][4]] + " " + seasons[i][4]
             else:
@@ -272,10 +272,10 @@ class NBA(commands.Cog):
                   else:
                     team += ", " + seasons[j][4]
                 j += 1
-            embed.description += team + " | Age: " + str(seasons[i][5]).split(".", 1)[0] + "***\n\n"
+            embed.description += team + " | `Age: " + str(seasons[i][5]).split(".", 1)[0] + "`***\n\n"
             season_checker.append(seasons[i][1])
             
-        embed.description += "\n***Total " + end + " Played: " + str(seasons_played) + "***"
+        embed.set_footer(text="Total " + end + " Played: " + str(seasons_played))
         return embed
           
       embed = seasons_loop(type)
@@ -398,7 +398,7 @@ class NBA(commands.Cog):
       if s['name'] == data_header:
         leaders_list = s["rowSet"]
         for l in leaders_list:
-          temp +=  "***" + str(l[3]) + ") " + l[1] + " - " + str(l[2]) + "***\n"
+          temp +=  "***" + str(l[3]) + ". " + l[1] + " - `" + str(l[2]) + "`***\n"
         embed = discord.Embed(title="**" + print_header + "**", description=temp, color=0x008080)
         return embed
         
@@ -411,7 +411,7 @@ class NBA(commands.Cog):
       if stand[5] == data_conference:
         team_tricode = teams.find_team_name_by_id(stand[2])["abbreviation"]
         team_name = stand[4]
-        result_str +=  "***" + str(position) + ") " + self.logos[team_tricode] + " " + team_name + " (" + stand[16] + ")***\n"
+        result_str +=  "***" + str(position) + ". " + self.logos[team_tricode] + " " + team_name + " `(" + stand[16] + ")`***\n"
         position += 1
         
     embed = discord.Embed(title="**" + header_conference + " Conference Standings:**", description=result_str, color=0x7851a9)
@@ -430,25 +430,25 @@ class NBA(commands.Cog):
       home_team_score = games[i]["homeTeam"]["score"]
   
       if "ET" in status:
-        scheduled_games += "***" + self.logos[away_team] + " " + away_team + "  at  " + home_team +  " " + self.logos[home_team] + " | " + status + "***\n\n"
+        scheduled_games += "***" + self.logos[away_team] + " " + away_team + "  @  " + home_team +  " " + self.logos[home_team] + " | `" + status + "`***\n\n"
       elif "Final" in status:
         if away_team_score > home_team_score:
-           finished_games += self.logos[away_team] + " __***" + away_team + " " + str(away_team_score) + "***__*** - " + str(home_team_score) + " " + home_team + " " + self.logos[home_team] + " | Final***\n\n"
+           finished_games += self.logos[away_team] + " __***" + away_team + " " + str(away_team_score) + "***__*** - " + str(home_team_score) + " " + home_team + " " + self.logos[home_team] + " | `Final`***\n\n"
         else:
-          finished_games += self.logos[away_team] + " ***" + away_team + " " + str(away_team_score) + " - ***__***" + str(home_team_score) + " " + home_team + "***__ " + self.logos[home_team] + " ***| Final***\n\n"
+          finished_games += self.logos[away_team] + " ***" + away_team + " " + str(away_team_score) + " - ***__***" + str(home_team_score) + " " + home_team + "***__ " + self.logos[home_team] + " ***| `Final`***\n\n"
       else:    
         current_games +=  "***" + self.logos[away_team] + " " + away_team + " " + str(away_team_score) + " - " + str(home_team_score) + " " + home_team + " " + self.logos[home_team] + " "
         
         if "Half" in status:
-          current_games += " | " + "Halftime***\n\n"
+          current_games += " | " + "`Halftime`***\n\n"
         elif "Tipoff" in status:
-          current_games += " | " + "Tipoff***\n\n"
+          current_games += " | " + "`Tipoff`***\n\n"
         elif "Qtr" in status:
           status = status.split(" ", 1)
-          current_games += " | " + status[1] + ": " + status[0] + "***\n\n"
+          current_games += " | `" + status[1] + ": " + status[0] + "`***\n\n"
         else:
           status = status.split(" ", 1)
-          current_games += " | " + status[0] + ": " + status[1] + "***\n\n"
+          current_games += " | `" + status[0] + ": " + status[1] + "`***\n\n"
     
     embed = discord.Embed(title="**NBA Games on " + header + ":**", color=0xFF5733)
     embed.description = current_games + scheduled_games + finished_games
