@@ -25,7 +25,7 @@ async def cogs_start():
     
 async def main():
   await cogs_start()
-  # keep_alive()
+  keep_alive()
   await client.start(os.environ["token"])
 
 #-----Load database
