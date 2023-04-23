@@ -413,7 +413,7 @@ class NBA(commands.Cog):
         team_name = stand[4]
         result_str +=  "***" + str(position) + ". " + self.logos[team_tricode] + " " + team_name + " `(" + stand[16] + ")`***\n"
         position += 1
-        
+    
     embed = discord.Embed(title="**" + header_conference + " Conference Standings:**", description=result_str, color=0x7851a9)
     return embed
   
@@ -421,34 +421,44 @@ class NBA(commands.Cog):
     current_games = ""
     scheduled_games = ""
     finished_games = ""
+
+    def check_if_series(series):
+      if series != '' or series != None:
+        return "\n***`" + series + "`***\n\n"
+      return "\n\n"
   
     for i in range(len(games)):
       status = games[i]["gameStatusText"]
+      series_score = games[i]["seriesText"]
       away_team = games[i]["awayTeam"]["teamTricode"]
       home_team = games[i]["homeTeam"]["teamTricode"]
       away_team_score = games[i]["awayTeam"]["score"]
       home_team_score = games[i]["homeTeam"]["score"]
   
       if "ET" in status:
-        scheduled_games += "***" + self.logos[away_team] + " " + away_team + "  @  " + home_team +  " " + self.logos[home_team] + " | `" + status + "`***\n\n"
+        scheduled_games += "***" + self.logos[away_team] + " " + away_team + "  @  " + home_team +  " " + self.logos[home_team] + " | `" + status + "`***"
+        scheduled_games += check_if_series(series_score)
       elif "Final" in status:
         if away_team_score > home_team_score:
-           finished_games += self.logos[away_team] + " __***" + away_team + " " + str(away_team_score) + "***__*** - " + str(home_team_score) + " " + home_team + " " + self.logos[home_team] + " | `Final`***\n\n"
+           finished_games += self.logos[away_team] + " __***" + away_team + " " + str(away_team_score) + "***__*** - " + str(home_team_score) + " " + home_team + " " + self.logos[home_team] + " | `Final`***"
         else:
-          finished_games += self.logos[away_team] + " ***" + away_team + " " + str(away_team_score) + " - ***__***" + str(home_team_score) + " " + home_team + "***__ " + self.logos[home_team] + " ***| `Final`***\n\n"
+          finished_games += self.logos[away_team] + " ***" + away_team + " " + str(away_team_score) + " - ***__***" + str(home_team_score) + " " + home_team + "***__ " + self.logos[home_team] + " ***| `Final`***"
+        finished_games += check_if_series(series_score)
       else:    
         current_games +=  "***" + self.logos[away_team] + " " + away_team + " " + str(away_team_score) + " - " + str(home_team_score) + " " + home_team + " " + self.logos[home_team] + " "
         
         if "Half" in status:
-          current_games += " | " + "`Halftime`***\n\n"
+          current_games += " | " + "`Halftime`***"
         elif "Tipoff" in status:
-          current_games += " | " + "`Tipoff`***\n\n"
+          current_games += " | " + "`Tipoff`***"
         elif "Qtr" in status:
           status = status.split(" ", 1)
-          current_games += " | `" + status[1] + ": " + status[0] + "`***\n\n"
+          current_games += " | `" + status[1].strip() + ": " + status[0].strip() + "`***"
         else:
           status = status.split(" ", 1)
-          current_games += " | `" + status[0] + ": " + status[1] + "`***\n\n"
+          current_games += " | `" + status[0].strip() + ": " + status[1].strip() + "`***"
+
+        current_games += check_if_series(series_score)
     
     embed = discord.Embed(title="**NBA Games on " + header + ":**", color=0xFF5733)
     embed.description = current_games + scheduled_games + finished_games
