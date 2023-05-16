@@ -399,7 +399,7 @@ class NBA(commands.Cog):
         leaders_list = s["rowSet"]
         for l in leaders_list:
           temp +=  "***" + str(l[3]) + ". " + l[1] + " - `" + str(l[2]) + "`***\n"
-        embed = discord.Embed(title="**" + print_header + "**", description=temp, color=0x008080)
+        embed = discord.Embed(title="**" + print_header + ":**", description=temp, color=0x008080)
         return embed
         
   def nba_standings(self, data_conference, header_conference):

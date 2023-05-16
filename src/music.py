@@ -117,7 +117,11 @@ class Music(commands.Cog):
               
             if self.is_playing[ctx.guild.id] == True:
               self.queue[ctx.guild.id].append([url2, title, channel, duration, thumbnail])
-              embed = discord.Embed(title="**Song added:**", description="***" + title + "***", color=0x4B0082)
+              embed = discord.Embed(title="**Song added:**", color=0x4B0082)
+              if "*" in title:
+                embed.description = title
+              else:
+                embed.description = "***" + title + "***"
               embed.add_field(name="**Channel:**", value="***" + channel + "***", inline=True)
               embed.add_field(name="**Duration:**", value="***" + duration + "***", inline=True)
               embed.add_field(name="**Queue Position:**", value="***" + str(len(self.queue[ctx.guild.id])) + "***", inline=True)
@@ -180,7 +184,11 @@ class Music(commands.Cog):
   async def current(self, ctx):
     if ctx.guild.id in self.is_playing:
       if self.is_playing[ctx.guild.id] == True:
-        embed = discord.Embed(title="**Current Song:**", description= "***" + self.title[ctx.guild.id] + "***", color=0x8B0000)
+        embed = discord.Embed(title="**Current Song:**", color=0x8B0000)
+        if "*" in self.title[ctx.guild.id]:
+          embed.description = self.title[ctx.guild.id]
+        else:
+          embed.description = "***" + self.title[ctx.guild.id] + "***"
         embed.add_field(name="**Channel:**", value= "***" + self.channel[ctx.guild.id] + "***", inline=True)
         embed.add_field(name="**Duration:**", value= "***" + self.duration[ctx.guild.id] + "***", inline=True)
         embed.set_thumbnail(url=self.thumbnail[ctx.guild.id])
