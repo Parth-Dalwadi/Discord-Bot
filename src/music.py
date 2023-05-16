@@ -45,6 +45,11 @@ class Music(commands.Cog):
         if member.guild.id in self.thumbnail:
           del self.thumbnail[member.guild.id]
 
+  def has_star(self, title):
+    if "*" in title:
+      return title
+    return "***" + title + "***"
+
   @commands.command()
   @commands.bot_has_permissions(send_messages=True)
   async def join(self, ctx):
@@ -117,11 +122,7 @@ class Music(commands.Cog):
               
             if self.is_playing[ctx.guild.id] == True:
               self.queue[ctx.guild.id].append([url2, title, channel, duration, thumbnail])
-              embed = discord.Embed(title="**Song added:**", color=0x4B0082)
-              if "*" in title:
-                embed.description = title
-              else:
-                embed.description = "***" + title + "***"
+              embed = discord.Embed(title="**Song added:**", description=self.has_star(title), color=0x4B0082)
               embed.add_field(name="**Channel:**", value="***" + channel + "***", inline=True)
               embed.add_field(name="**Duration:**", value="***" + duration + "***", inline=True)
               embed.add_field(name="**Queue Position:**", value="***" + str(len(self.queue[ctx.guild.id])) + "***", inline=True)
@@ -184,11 +185,7 @@ class Music(commands.Cog):
   async def current(self, ctx):
     if ctx.guild.id in self.is_playing:
       if self.is_playing[ctx.guild.id] == True:
-        embed = discord.Embed(title="**Current Song:**", color=0x8B0000)
-        if "*" in self.title[ctx.guild.id]:
-          embed.description = self.title[ctx.guild.id]
-        else:
-          embed.description = "***" + self.title[ctx.guild.id] + "***"
+        embed = discord.Embed(title="**Current Song:**", description=self.has_star(self.title[ctx.guild.id]), color=0x8B0000)
         embed.add_field(name="**Channel:**", value= "***" + self.channel[ctx.guild.id] + "***", inline=True)
         embed.add_field(name="**Duration:**", value= "***" + self.duration[ctx.guild.id] + "***", inline=True)
         embed.set_thumbnail(url=self.thumbnail[ctx.guild.id])
@@ -254,7 +251,10 @@ class Music(commands.Cog):
         embed_index = 0
         
         for i in range(len(self.queue[ctx.guild.id])):
-          str1 = "***" + str(i+1) + ". " + str(self.queue[ctx.guild.id][i][1]) + " | `" + self.queue[ctx.guild.id][i][3] + "`***\n\n"
+          if "*" in str(self.queue[ctx.guild.id][i][1]):
+            str1 = str(i+1) + ". " + str(self.queue[ctx.guild.id][i][1]) + " ***| `" + self.queue[ctx.guild.id][i][3] + "`***\n\n"
+          else:
+            str1 = "***" + str(i+1) + ". " + str(self.queue[ctx.guild.id][i][1]) + " | `" + self.queue[ctx.guild.id][i][3] + "`***\n\n"
 
           if len(embeds[embed_index].description) + len(str1) > 4096:
             embeds.append(discord.Embed(title="**Queue Continued:**", description="", color=0x670A0A))
@@ -328,7 +328,7 @@ class Music(commands.Cog):
                 pos -= 1
                 title = self.queue[ctx.guild.id][pos][1]
                 thumbnail = self.queue[ctx.guild.id][pos][4]
-                embed = discord.Embed(title="**Song Removed:**", description="***" + title + "***", color=0x355E3B)
+                embed = discord.Embed(title="**Song Removed:**", description=self.has_star(title), color=0x355E3B)
                 embed.set_thumbnail(url=thumbnail)
                 self.queue[ctx.guild.id].pop(pos)
                 await ctx.send(embed=embed)
