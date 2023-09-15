@@ -28,7 +28,7 @@ async def main():
   keep_alive()
   await client.start(os.environ["token"])
 
-#-----Load database
+# -----Load database
 if "guild_symbols" not in db.keys():
   db["guild_symbols"] = {}
 

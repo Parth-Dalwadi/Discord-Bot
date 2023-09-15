@@ -619,7 +619,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 
 [[package]]
 name = "websockets"
-version = "10.4"
+version = "11.0.3"
 description = "An implementation of the WebSocket Protocol (RFC 6455 & 7692)"
 category = "main"
 optional = false
@@ -669,7 +669,7 @@ multidict = ">=4.0"
 
 [[package]]
 name = "yt-dlp"
-version = "2023.3.4"
+version = "2023.7.6"
 description = "A youtube-dl fork with additional features and patches"
 category = "main"
 optional = false
@@ -686,7 +686,7 @@ websockets = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.10.0,<3.11"
-content-hash = "b43c966187c499d4d79f7ad854ff01c64344d7fb90e068857d6fd10c0ef25900"
+content-hash = "a574ad498e26a383e68ebae1667e081325a01ee1b6fa9b8d8aa6419faaa722e2"
 
 [metadata.files]
 aiohttp = []
